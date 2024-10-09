@@ -21,7 +21,8 @@ struct Info: Codable {
 }
 
 // MARK: - Result
-struct Result: Codable {
+struct Result: Codable, Hashable {
+    
     let gender: Gender
     let name: Name
     let location: Location
@@ -32,6 +33,15 @@ struct Result: Codable {
     let id: ID
     let picture: Picture
     let nat: String
+    
+    
+    static func == (lhs: Result, rhs: Result) -> Bool {
+        lhs.email == rhs.email // Assuming email is unique
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id) // Hash email as the unique identifier
+    }
 }
 
 // MARK: - Dob
@@ -46,7 +56,7 @@ enum Gender: String, Codable {
 }
 
 // MARK: - ID
-struct ID: Codable {
+struct ID: Codable, Hashable {
     let name: String
     let value: String?
 }
