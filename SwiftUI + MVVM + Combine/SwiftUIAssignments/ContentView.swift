@@ -29,7 +29,6 @@ struct ContentView: View {
                        viewModel.fetchUsers()
                    }
                    .onAppear {
-                       // Add pagination when the list appears
                        if viewModel.currentPage == 1 {
                            viewModel.fetchUsers()
                        }
